@@ -1,0 +1,104 @@
+@keyframes glow-drift-1 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.75;
+  }
+  33% {
+    transform: translate3d(-9%, 6%, 0) scale(1.07);
+    opacity: 0.9;
+  }
+  66% {
+    transform: translate3d(4%, -5%, 0) scale(0.95);
+    opacity: 0.68;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.75;
+  }
+}
+
+@keyframes glow-drift-2 {
+  0% {
+    transform: rotate(75deg) translate3d(0, 0, 0) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: rotate(75deg) translate3d(10%, -7%, 0) scale(1.08);
+    opacity: 0.85;
+  }
+  100% {
+    transform: rotate(75deg) translate3d(0, 0, 0) scale(1);
+    opacity: 0.55;
+  }
+}
+
+@keyframes glow-drift-3 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1.1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate3d(8%, 8%, 0) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.1);
+    opacity: 0.5;
+  }
+}
+
+.glow-anim-1 {
+  left: 70%;
+  top: -10%;
+  width: 40%;
+  height: 69%;
+  filter: blur(75px);
+  animation: glow-drift-1 22s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.glow-anim-2 {
+  left: 12.8%;
+  top: -10%;
+  width: 40%;
+  height: 42%;
+  filter: blur(85px);
+  animation: glow-drift-2 26s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.glow-anim-3 {
+  left: 10.6%;
+  top: -24%;
+  width: 40%;
+  height: 37%;
+  filter: blur(112px);
+  animation: glow-drift-3 24s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@media (min-width: 1000px) {
+  .glow-anim-1 {
+    left: 78%;
+    top: -52%;
+    width: 55%;
+    height: 80%;
+    filter: blur(120px);
+  }
+
+  .glow-anim-2 {
+    left: -26%;
+    top: -55%;
+    width: 55%;
+    height: 60%;
+    filter: blur(135px);
+  }
+
+  .glow-anim-3 {
+    left: 2%;
+    top: -34%;
+    width: 55%;
+    height: 52%;
+    filter: blur(170px);
+  }
+}
