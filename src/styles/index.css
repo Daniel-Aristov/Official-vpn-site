@@ -2,15 +2,109 @@
 @config '../../tailwind.config.ts';
 @import './animations.css';
 
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/unbounded-bold.ttf') format('truetype');
+}
+
 @theme {
+  --font-brand: 'Unbounded', sans-serif;
   /* Base */
   --color-white: #ffffff;
   --color-black: #000000;
+  --color-primary: #255de0;
+  --color-primary-30: rgba(37, 93, 224, 0.3);
+  --color-secondary: #39393d;
+  --color-action-disabled: #737272;
+  --color-checkout-gray: #a5a6a7;
+  --color-checkout-gift: #ffbd61;
+  --color-success: #139d76;
+  --color-error: #ff6b6b;
+  --color-modal: #28282d;
+  --color-payment-method: #3e3e42;
+  --color-white-10: rgba(255, 255, 255, 0.1);
+  --color-white-20: rgba(255, 255, 255, 0.2);
+  --color-white-50: rgba(255, 255, 255, 0.5);
+  --color-white-80: rgba(255, 255, 255, 0.8);
+  --color-overlay: rgba(0, 0, 0, 0.6);
+  --color-navigation-shadow: rgba(0, 0, 0, 0.12);
+  --color-support: rgba(37, 93, 224, 0.6);
+  --color-gift-blue: #26407d;
+  --color-gift-gray: #4c4b48;
+  --color-gift-gold: rgba(224, 162, 37, 0.4);
+  --color-feature-speed: #222437;
+  --color-feature-speed-end: #1b1d2a;
+  --color-feature-speed-border: rgba(151, 117, 250, 0.4);
+  --color-feature-speed-glow: rgba(151, 117, 250, 0.15);
+  --color-feature-traffic: #4b1e5d;
+  --color-feature-traffic-end: #1b0b21;
+  --color-feature-traffic-border: rgba(222, 151, 255, 0.4);
+  --color-feature-traffic-glow: rgba(151, 117, 250, 0.15);
+  --color-feature-shield: #182b36;
+  --color-feature-shield-end: #152229;
+  --color-feature-shield-border: rgba(34, 211, 238, 0.4);
+  --color-feature-shield-glow: rgba(34, 211, 238, 0.15);
+  --color-feature-location: #2a2923;
+  --color-feature-location-end: #20201e;
+  --color-feature-location-border: rgba(250, 176, 5, 0.4);
+  --color-feature-location-glow: rgba(250, 176, 5, 0.15);
+  --color-feature-people: #182b2f;
+  --color-feature-people-end: #152225;
+  --color-feature-people-border: rgba(32, 201, 151, 0.4);
+  --color-feature-people-glow: rgba(32, 201, 151, 0.15);
+  --color-feature-setup: #81245c;
+  --color-feature-setup-end: #3f112d;
+  --color-feature-setup-border: rgba(255, 184, 227, 0.4);
+  --color-feature-setup-glow: #3c152d;
+
+  /* Original Figma icon colours */
+  --color-icon-003282: #003282;
+  --color-icon-e00000: #e00000;
+  --color-icon-ffcf00: #ffcf00;
+  --color-icon-d4a72c: #d4a72c;
+  --color-icon-df0a37: #df0a37;
+  --color-icon-fb6ac0: #fb6ac0;
+  --color-icon-66d9e8: #66d9e8;
+  --color-icon-63e6be: #63e6be;
+  --color-icon-b197fc: #b197fc;
+  --color-icon-c753ff: #c753ff;
+
+  --color-checkout-icon-5b57a2: #5b57a2;
+  --color-checkout-icon-d90751: #d90751;
+  --color-checkout-icon-fab718: #fab718;
+  --color-checkout-icon-ed6f26: #ed6f26;
+  --color-checkout-icon-63b22f: #63b22f;
+  --color-checkout-icon-1487c9: #1487c9;
+  --color-checkout-icon-017f36: #017f36;
+  --color-checkout-icon-984995: #984995;
 
   /* Glow */
   --color-glow-blue: #2543f2;
   --color-glow-cyan: #00e1ff;
   --color-glow-soft: rgba(68, 148, 252, 0.4);
+}
+
+@layer base {
+  a:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--color-glow-cyan);
+    outline-offset: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a,
+  dialog,
+  nav,
+  main *,
+  header *,
+  [inert] {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 *,
@@ -27,7 +121,13 @@ body {
   margin: 0;
   background-color: var(--color-black);
   font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    'SF Pro Text',
+    -apple-system,
+    BlinkMacSystemFont,
+    Roboto,
+    Arial,
+    'Segoe UI',
+    sans-serif;
 }
 
 #root {
