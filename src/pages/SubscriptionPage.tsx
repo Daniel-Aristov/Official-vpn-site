@@ -36,6 +36,9 @@ function SubscriptionPage() {
         className="flex min-w-0 flex-col gap-6"
         onSubmit={(event) => {
           event.preventDefault()
+          const paymentMethod = new FormData(event.currentTarget).get(
+            'paymentMethod',
+          )
           const order = {
             planId: plan.id,
             email: email.trim(),
@@ -43,7 +46,9 @@ function SubscriptionPage() {
           }
           saveDemoSubscription(order)
           const result =
-            params.get('demoResult') === 'error' ? 'error' : 'success'
+            paymentMethod === 'card' || params.get('demoResult') === 'error'
+              ? 'error'
+              : 'success'
           navigate(`/subscribe/${result}?plan=${plan.id}`, { state: order })
         }}
       >
