@@ -3,6 +3,7 @@ import { TelegramIcon } from '@/components/icons/TelegramIcon'
 import { ActionLink } from '@/components/UI/ActionLink'
 import { CheckoutCard } from './CheckoutCard'
 import { CopyAction } from './CopyAction'
+import { supportTelegram } from '@/data/supportContacts'
 
 const supportEmail = 'support@oflvpn.com'
 
@@ -26,11 +27,14 @@ export function SubscriptionSupport() {
               <h3 className="text-lg font-semibold">
                 Чат поддержки в Telegram
               </h3>
-              <p className="break-all text-white-80">@vpnbot_support</p>
+              <p className="break-all text-white-80">
+                {supportTelegram.handle}
+              </p>
             </div>
             <ActionLink
-              href="https://t.me/vpnbot_support"
-              target="blank"
+              href={supportTelegram.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="self-start"
               size="small"
               fullWidth={false}

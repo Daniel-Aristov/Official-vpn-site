@@ -88,9 +88,7 @@ export function SubscriptionFaq() {
             >
               <div className="overflow-hidden">
                 <div className="flex flex-col gap-4 pt-4">
-                  <p className="text-white-80">
-                    {index + 1}. {question.text}
-                  </p>
+                  <p className="text-white-80">{question.text}</p>
                   {question.link && (
                     <ActionLink href={question.href} target="blank">
                       Перейти сразу в нужное место

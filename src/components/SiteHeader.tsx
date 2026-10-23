@@ -1,11 +1,16 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Link } from 'react-router'
-import { subscriptionPath } from '@/data/subscriptionPlans'
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react'
 import { useBottomHeader } from '@/hooks/useBottomHeader'
 import { useAnchorScroll } from '@/hooks/useAnchorScroll'
 import { MenuIcon } from '@/components/icons/MenuIcon'
 import { HeadsetIcon } from '@/components/icons/HeadsetIcon'
 import { BrandLogo } from '@/components/BrandLogo'
+import { supportTelegram } from '@/data/supportContacts'
 
 const navigation = [
   { label: 'Возможности', href: '#features' },
@@ -83,7 +88,6 @@ function Navigation({
     <div
       ref={navigationRef}
       inert={!isActive}
-      aria-hidden={!isActive}
       className={`relative isolate flex overflow-hidden rounded-[28px] border border-white-10 py-[7px] pr-[7px] pl-[15px] shadow-[0_8px_40px_var(--color-navigation-shadow)] ${position === 'bottom' ? 'flex-col-reverse' : 'flex-col'}`}
     >
       <span
@@ -131,13 +135,16 @@ function Navigation({
         >
           <BrandLogo />
         </a>
-        <Link
-          to={subscriptionPath()}
-          onClick={onClose}
+        <a
+          href="#pricing"
+          onClick={(event) => {
+            scrollToAnchor(event)
+            onClose()
+          }}
           className="ml-1 flex min-h-10 shrink-0 items-center justify-center rounded-full bg-primary px-4 py-2 text-base leading-6 font-semibold transition-[transform,filter] duration-200 ease-out hover:brightness-110 active:scale-[0.98]"
         >
           Купить
-        </Link>
+        </a>
       </div>
       <div
         id={`navigation-${position}`}
@@ -194,7 +201,9 @@ export function SiteHeader() {
         className={`fixed inset-x-0 bottom-[max(16px,env(safe-area-inset-bottom))] z-40 mx-auto w-full max-w-[960px] px-4 min-[1000px]:px-0 ${isBottomHeaderVisible ? 'visible' : 'invisible pointer-events-none'}`}
       >
         <a
-          href="#"
+          href={supportTelegram.href}
+          target="_blank"
+          rel="noopener noreferrer"
           aria-label="Написать в поддержку"
           className="mb-4 ml-auto flex size-14 items-center justify-center rounded-full border border-white-20 bg-support shadow-[0_8px_40px_var(--color-navigation-shadow)] backdrop-blur-md transition-transform duration-200 ease-out active:scale-95"
         >

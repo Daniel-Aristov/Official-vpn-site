@@ -15,6 +15,7 @@ import { SubscriptionFaq } from '@/components/subscription/SubscriptionFaq'
 import { ActionLink } from '@/components/UI/ActionLink'
 import { InfoIcon } from '@/components/icons/InfoIcon'
 import { getSubscriptionPlan, subscriptionPath } from '@/data/subscriptionPlans'
+import { supportTelegram } from '@/data/supportContacts'
 import {
   isDemoSubscription,
   readDemoSubscription,
@@ -50,7 +51,13 @@ function SubscriptionResultPage({ status }: { status: 'success' | 'error' }) {
             </p>
           </div>
           <div className="flex flex-col gap-2">
-            <ActionLink>Написать в поддержку</ActionLink>
+            <ActionLink
+              href={supportTelegram.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Написать в поддержку
+            </ActionLink>
             <ActionLink variant="secondary" to={subscriptionPath(plan.id)}>
               Вернуться и повторить ещё раз
             </ActionLink>

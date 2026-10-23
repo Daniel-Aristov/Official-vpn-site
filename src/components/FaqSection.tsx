@@ -92,9 +92,8 @@ export function FaqSection() {
                 className={`grid transition-[grid-template-rows,opacity] motion-reduce:transition-none ${isOpen ? 'grid-rows-[1fr] opacity-100 duration-250 ease-out' : 'grid-rows-[0fr] opacity-0 duration-200 ease-in'}`}
               >
                 <div className="overflow-hidden">
-                  <p className="flex gap-1 pt-4 text-base leading-[1.3] font-medium text-white-80">
-                    <span className="min-w-5 shrink-0">{index + 1}.</span>
-                    <span>{answer}</span>
+                  <p className="pt-4 text-base leading-[1.3] font-medium text-white-80">
+                    {answer}
                   </p>
                 </div>
               </div>

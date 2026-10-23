@@ -68,6 +68,17 @@ export function useAnchorScroll() {
         document.documentElement.scrollHeight - window.innerHeight,
       ),
     )
+    const focusTarget =
+      target.querySelector<HTMLElement>('h1, h2, h3') ?? target
+    if (!focusTarget.hasAttribute('tabindex')) {
+      focusTarget.setAttribute('tabindex', '-1')
+      focusTarget.addEventListener(
+        'blur',
+        () => focusTarget.removeAttribute('tabindex'),
+        { once: true },
+      )
+    }
+    focusTarget.focus({ preventScroll: true })
     void navigate(hash, { preventScrollReset: true })
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
