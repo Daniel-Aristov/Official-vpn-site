@@ -14,7 +14,6 @@ export function EmailCorrectionModal({
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
   const [email, setEmail] = useState('')
 
   useEffect(() => {
@@ -22,7 +21,6 @@ export function EmailCorrectionModal({
     if (!dialog) return
     if (isOpen) {
       dialog.showModal()
-      inputRef.current?.focus()
       const overflow = document.body.style.overflow
       document.body.style.overflow = 'hidden'
       return () => {
@@ -68,7 +66,9 @@ export function EmailCorrectionModal({
         <div className="flex items-center justify-between gap-2.5">
           <h2
             id="edit-email-title"
-            className="text-2xl leading-[1.3] font-semibold"
+            tabIndex={-1}
+            autoFocus
+            className="text-2xl leading-[1.3] font-semibold outline-none"
           >
             Ввели не ту почту?
           </h2>
@@ -96,7 +96,6 @@ export function EmailCorrectionModal({
           информацию о покупке.
         </p>
         <EmailField
-          ref={inputRef}
           aria-label="Новый адрес электронной почты"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
