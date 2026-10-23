@@ -12,6 +12,17 @@
 
 @theme {
   --font-brand: 'Unbounded', sans-serif;
+  --animate-server-marquee: server-marquee 48s linear infinite;
+
+  @keyframes server-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
   /* Base */
   --color-white: #ffffff;
   --color-black: #000000;

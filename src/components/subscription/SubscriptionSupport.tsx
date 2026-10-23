@@ -59,9 +59,9 @@ export function SubscriptionSupport() {
                 href={`mailto:${supportEmail}`}
                 size="small"
                 fullWidth={false}
-                className="min-w-0 flex-1"
+                className="min-w-0"
               >
-                Написать обращение
+                Написать нам
               </ActionLink>
               <CopyAction
                 value={supportEmail}
