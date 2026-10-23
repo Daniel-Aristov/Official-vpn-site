@@ -9,6 +9,7 @@ const questions = [
     title: 'Как подключить к VPN',
     text: 'Перейдите в личный кабинет и нажмите кнопку «Установка и настройка». Следуйте пошаговой инструкции, чтобы установить и настроить VPN.',
     link: true,
+    href: 'https://oflvpn.com/setup',
   },
   {
     title: 'Стоимость подписки и количество устройств',
@@ -19,11 +20,13 @@ const questions = [
     title: 'Как продлить текущую подписку?',
     text: 'Перейдите в личный кабинет и нажмите кнопку «Продлить VPN». Выберите количество устройств и желаемый период подписки, затем перейдите к оплате.',
     link: true,
+    href: 'https://oflvpn.com/subscription',
   },
   {
     title: 'Где посмотреть список устройств, где добавлен ключ?',
     text: 'Перейдите в личный кабинет, откройте раздел «Профиль» и выберите пункт «Устройства». В этом разделе вы можете удалить ненужные устройства.',
     link: true,
+    href: 'https://oflvpn.com/devices',
   },
   {
     title: 'Безопасен ли наш VPN',
@@ -89,7 +92,9 @@ export function SubscriptionFaq() {
                     {index + 1}. {question.text}
                   </p>
                   {question.link && (
-                    <ActionLink>Перейти сразу в нужное место</ActionLink>
+                    <ActionLink href={question.href} target="blank">
+                      Перейти сразу в нужное место
+                    </ActionLink>
                   )}
                 </div>
               </div>
