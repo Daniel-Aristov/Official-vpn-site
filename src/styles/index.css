@@ -26,6 +26,7 @@
   /* Base */
   --color-white: #ffffff;
   --color-black: #000000;
+  --color-black-40: rgba(0, 0, 0, 0.4);
   --color-primary: #255de0;
   --color-primary-30: rgba(37, 93, 224, 0.3);
   --color-secondary: #39393d;

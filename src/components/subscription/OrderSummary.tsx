@@ -2,6 +2,8 @@ import { ActionLink } from '@/components/UI/ActionLink'
 import { CheckoutCard } from './CheckoutCard'
 import { CheckboxCheckedIcon } from '@/components/icons/CheckboxCheckedIcon'
 import { formatPrice, type SubscriptionPlan } from '@/data/subscriptionPlans'
+import { Link } from 'react-router'
+import { legalDocumentPaths } from '@/data/legalDocuments'
 
 export function OrderSummary({
   plan,
@@ -19,12 +21,33 @@ export function OrderSummary({
       <dl className="flex flex-col gap-4 font-medium">
         <div className="flex items-center justify-between gap-4">
           <dt className="text-white-80">Тариф</dt>
-          <dd>{plan.duration}</dd>
+          <dd className="flex min-w-0 flex-wrap items-center justify-end gap-1.5 text-right">
+            {plan.bonusMonths > 0 && (
+              <span className="flex items-center gap-1.5 whitespace-nowrap">
+                <span className="text-checkout-gift">
+                  <span aria-hidden="true">🎁</span> + {plan.bonusMonths}{' '}
+                  {plan.bonusMonths === 1 ? 'месяц' : 'месяца'}
+                </span>
+                <span aria-hidden="true" className="h-4 w-px bg-white-20" />
+              </span>
+            )}
+            <span className="whitespace-nowrap">{plan.duration}</span>
+          </dd>
         </div>
         <div className="flex items-center justify-between gap-4">
           <dt className="text-white-80">Итого</dt>
-          <dd aria-live="polite" className="text-2xl leading-[1.3] font-bold">
-            {formatPrice(plan.price)}
+          <dd
+            aria-live="polite"
+            className="flex flex-wrap items-center justify-end gap-2"
+          >
+            {plan.oldPrice && (
+              <s className="font-normal whitespace-nowrap text-white-50">
+                {formatPrice(plan.oldPrice)}
+              </s>
+            )}
+            <strong className="text-2xl leading-[1.3] font-bold whitespace-nowrap">
+              {formatPrice(plan.price)}
+            </strong>
           </dd>
         </div>
       </dl>
@@ -50,13 +73,23 @@ export function OrderSummary({
         </label>
         <p className="text-sm text-white-50">
           Я соглашаюсь с{' '}
-          <a href="#" className="font-semibold underline underline-offset-4">
+          <Link
+            to={legalDocumentPaths.offer}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold underline underline-offset-4"
+          >
             офертой
-          </a>{' '}
+          </Link>{' '}
           и{' '}
-          <a href="#" className="font-semibold underline underline-offset-4">
+          <Link
+            to={legalDocumentPaths.privacy}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold underline underline-offset-4"
+          >
             политикой конфиденциальности
-          </a>
+          </Link>
         </p>
       </div>
       <ActionLink

@@ -1,0 +1,13 @@
+/subscribe/ /subscribe 301
+/subscribe/success/ /subscribe/success 301
+/subscribe/error/ /subscribe/error 301
+/offer/ /offer 301
+/privacy/ /privacy 301
+/data-processing/ /data-processing 301
+/subscribe /subscribe.html 200
+/subscribe/success /subscribe/success.html 200
+/subscribe/error /subscribe/error.html 200
+/offer /offer.html 200
+/privacy /privacy.html 200
+/data-processing /data-processing.html 200
+/* /index.html 200

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
-/** Show the offer once, unless the visitor has already used a page action. */
-export function useEngagementPrompt(delay = 40_000) {
+export function useEngagementPrompt(delay = 60_000) {
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {

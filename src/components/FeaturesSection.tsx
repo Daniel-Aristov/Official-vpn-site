@@ -58,7 +58,7 @@ export function FeaturesSection() {
       aria-labelledby="features-title"
       className="flex scroll-mt-6 flex-col gap-4 px-4 min-[1000px]:px-0"
     >
-      <SectionHeading id="features-title" title="Возможности">
+      <SectionHeading id="features-title" title="Возможности OFL VPS">
         Все необходимое для стабильного подключения
       </SectionHeading>
       <div className="grid gap-4 md:grid-cols-2">

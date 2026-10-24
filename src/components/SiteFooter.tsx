@@ -1,4 +1,6 @@
-const links = ['Оферта', 'Обработка данных', 'Политика конфиденциальности']
+import { Link } from 'react-router'
+import { BrandLogo } from '@/components/BrandLogo'
+import { legalDocumentLinks } from '@/data/legalDocuments'
 
 export function SiteFooter() {
   return (
@@ -12,18 +14,17 @@ export function SiteFooter() {
         <BrandLogo variant="footer" />
       </a>
       <nav aria-label="Информация о сервисе" className="flex flex-col gap-0.5">
-        {links.map((label) => (
-          <a
-            key={label}
-            href="#"
+        {legalDocumentLinks.map(({ id, title, href }) => (
+          <Link
+            key={id}
+            to={href}
             className="py-1 text-base leading-[1.3] font-medium transition-opacity duration-150 hover:opacity-70"
           >
-            {label}
-          </a>
+            {title}
+          </Link>
         ))}
       </nav>
       <p className="text-base leading-[1.3] text-white-80">© 2026 OFL VPS.</p>
     </footer>
   )
 }
-import { BrandLogo } from '@/components/BrandLogo'

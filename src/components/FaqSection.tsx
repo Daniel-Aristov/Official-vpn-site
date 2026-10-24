@@ -1,43 +1,66 @@
 import { useState } from 'react'
 import { SectionHeading } from '@/components/UI/SectionHeading'
-import { PlusIcon } from '@/components/icons/PlusIcon'
-import { MinusIcon } from '@/components/icons/MinusIcon'
+import { FaqItem } from '@/components/UI/FaqItem'
 
-const questions = [
+import { ActionLink } from '@/components/UI/ActionLink'
+import { useAnchorScroll } from '@/hooks/useAnchorScroll'
+import {
+  formatPlanPeriod,
+  formatPrice,
+  getSubscriptionPlan,
+  subscriptionPath,
+} from '@/data/subscriptionPlans'
+
+interface FaqQuestion {
+  question: string
+  answer: string
+  action?: {
+    label: string
+    href: string
+    anchor?: boolean
+  }
+}
+
+const trialPlan = getSubscriptionPlan('trial')
+
+const questions: FaqQuestion[] = [
   {
-    question: 'Где расположены серверы?',
+    question: 'Как подключить Official VPS?',
     answer:
-      'Серверы доступны в разных регионах мира, включая Европу, США и Россию. Мы постоянно расширяем географию и добавляем новые локации.',
+      'Выберите подходящий тариф и перейдите к оформлению заказа. Укажите свой email, выберите способ оплаты и завершите оплату. После этого вы получите всё необходимое для подключения.',
+    action: {
+      label: 'Перейти к тарифам',
+      href: '#pricing',
+      anchor: true,
+    },
   },
   {
-    question: 'Сколько устройств можно подключить?',
-    answer:
-      'Один доступ можно использовать на 6 устройствах: смартфоне, компьютере, планшете и других устройствах.',
+    question: 'Можно ли сначала попробовать Official VPS?',
+    answer: `Конечно! Попробуйте Official VPS в течение ${formatPlanPeriod(trialPlan)} всего за ${formatPrice(trialPlan.price)}. Вам будут доступны все возможности сервиса и высокая скорость соединения.`,
+    action: {
+      label: `Попробовать за ${formatPrice(trialPlan.price)}`,
+      href: subscriptionPath(trialPlan.id),
+    },
   },
   {
-    question: 'Можно ли менять локацию?',
+    question: 'Что будет после пробного периода?',
     answer:
-      'Да, вы можете выбирать подходящую локацию и переключаться между серверами в несколько нажатий.',
+      'После окончания пробного периода начнёт действовать выбранный тариф. Если сервис вам не подойдёт, вы сможете отменить подписку в личном кабинете.',
   },
   {
-    question: 'Какие локации у нас доступны?',
-    answer:
-      'Доступны 10+ локаций в Европе, США и других регионах, в том числе Германия, Финляндия и Польша. Новые локации постоянно добавляются.',
+    question: 'Есть ли ограничения по трафику?',
+    answer: 'Нет, на всех тарифах доступен безлимитный трафик.',
   },
   {
-    question: 'Какие возможности есть у PRO?',
+    question: 'Безопасен ли наш VPS?',
     answer:
-      'PRO включает доступ ко всем локациям, высокую скорость, безлимитный трафик и подключение до 6 устройств.',
-  },
-  {
-    question: 'На какой срок можно оформить доступ?',
-    answer:
-      'Доступ можно оформить на 1, 3, 6 или 12 месяцев. При оплате на 3, 6 или 12 месяцев вы получаете дополнительные месяцы в подарок.',
+      'Мы используем шифрование для защиты передаваемых данных. Мы не храним пользовательские данные и не передаем их третьим лицам.',
   },
 ]
 
 export function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const scrollToAnchor = useAnchorScroll()
 
   return (
     <section
@@ -49,55 +72,31 @@ export function FaqSection() {
         В случае других вопросов, поддержка всегда на связи!
       </SectionHeading>
       <div className="flex flex-col gap-4">
-        {questions.map(({ question, answer }, index) => {
+        {questions.map(({ question, answer, action }, index) => {
           const isOpen = openIndex === index
           return (
-            <article
+            <FaqItem
               key={question}
-              className="rounded-2xl border border-white-10 bg-white-10 p-[15px]"
+              id={`faq-${index}`}
+              number={index + 1}
+              question={question}
+              isOpen={isOpen}
+              onToggle={() => setOpenIndex(isOpen ? null : index)}
             >
-              <h3>
-                <a
-                  href="#"
-                  role="button"
-                  id={`question-${index}`}
-                  aria-expanded={isOpen}
-                  aria-controls={`answer-${index}`}
-                  onKeyDown={(event) => {
-                    if (event.key === ' ') {
-                      event.preventDefault()
-                      event.currentTarget.click()
-                    }
-                  }}
-                  onClick={(event) => {
-                    event.preventDefault()
-                    setOpenIndex(isOpen ? null : index)
-                  }}
-                  className="flex w-full items-start justify-between gap-4 rounded-lg text-left text-base leading-[1.3] font-medium"
+              <p className="text-base leading-[1.3] font-medium text-white-80">
+                {answer}
+              </p>
+              {action && (
+                <ActionLink
+                  size="compact"
+                  href={action.anchor ? action.href : undefined}
+                  to={action.anchor ? undefined : action.href}
+                  onClick={action.anchor ? scrollToAnchor : undefined}
                 >
-                  <span className="flex min-w-0 gap-1 pt-0.5">
-                    <span className="min-w-5 shrink-0">{index + 1}.</span>
-                    <span className="max-w-[200px]">{question}</span>
-                  </span>
-                  <span className="flex size-[46px] shrink-0 items-center justify-center rounded-full bg-secondary transition-transform duration-200 ease-out active:scale-95">
-                    {isOpen ? <MinusIcon /> : <PlusIcon />}
-                  </span>
-                </a>
-              </h3>
-              <div
-                id={`answer-${index}`}
-                role="region"
-                aria-labelledby={`question-${index}`}
-                inert={!isOpen}
-                className={`grid transition-[grid-template-rows,opacity] motion-reduce:transition-none ${isOpen ? 'grid-rows-[1fr] opacity-100 duration-250 ease-out' : 'grid-rows-[0fr] opacity-0 duration-200 ease-in'}`}
-              >
-                <div className="overflow-hidden">
-                  <p className="pt-4 text-base leading-[1.3] font-medium text-white-80">
-                    {answer}
-                  </p>
-                </div>
-              </div>
-            </article>
+                  {action.label}
+                </ActionLink>
+              )}
+            </FaqItem>
           )
         })}
       </div>

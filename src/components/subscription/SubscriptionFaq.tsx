@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { PlusIcon } from '@/components/icons/PlusIcon'
-import { MinusIcon } from '@/components/icons/MinusIcon'
+import { FaqItem } from '@/components/UI/FaqItem'
+import { SectionHeading } from '@/components/UI/SectionHeading'
 import { ActionLink } from '@/components/UI/ActionLink'
-import { CheckoutCard } from './CheckoutCard'
 
 const questions = [
   {
@@ -38,68 +37,43 @@ const questions = [
 export function SubscriptionFaq() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   return (
-    <CheckoutCard
-      className="border border-white-10 p-[15px]"
+    <section
+      className="flex min-w-0 flex-col gap-4"
       aria-labelledby="subscription-faq-title"
     >
-      <h2 id="subscription-faq-title" className="font-medium">
-        Ответы на часто задаваемые вопросы
-      </h2>
-      {questions.map((question, index) => {
-        const isOpen = openIndex === index
-        return (
-          <article
-            key={question.title}
-            className="rounded-2xl bg-white-10 p-4 ring-1 ring-white-10 ring-inset"
-          >
-            <h3>
-              <a
-                href="#"
-                role="button"
-                id={`subscription-question-${index}`}
-                aria-controls={`subscription-answer-${index}`}
-                aria-expanded={isOpen}
-                className="flex items-center justify-between gap-4 font-medium"
-                onKeyDown={(event) => {
-                  if (event.key === ' ') {
-                    event.preventDefault()
-                    event.currentTarget.click()
-                  }
-                }}
-                onClick={(event) => {
-                  event.preventDefault()
-                  setOpenIndex(isOpen ? null : index)
-                }}
-              >
-                <span>
-                  {index + 1}. {question.title}
-                </span>
-                <span className="flex size-[46px] shrink-0 items-center justify-center rounded-full bg-secondary">
-                  {isOpen ? <MinusIcon /> : <PlusIcon />}
-                </span>
-              </a>
-            </h3>
-            <div
-              id={`subscription-answer-${index}`}
-              role="region"
-              aria-labelledby={`subscription-question-${index}`}
-              inert={!isOpen}
-              className={`grid transition-[grid-template-rows,opacity] motion-reduce:transition-none ${isOpen ? 'grid-rows-[1fr] opacity-100 duration-250 ease-out' : 'grid-rows-[0fr] opacity-0 duration-200 ease-in'}`}
+      <SectionHeading
+        id="subscription-faq-title"
+        title="Ответы на часто задаваемые вопросы"
+      />
+      <div className="flex flex-col gap-4">
+        {questions.map((question, index) => {
+          const isOpen = openIndex === index
+          return (
+            <FaqItem
+              key={question.title}
+              id={`subscription-faq-${index}`}
+              number={index + 1}
+              question={question.title}
+              isOpen={isOpen}
+              onToggle={() => setOpenIndex(isOpen ? null : index)}
             >
-              <div className="overflow-hidden">
-                <div className="flex flex-col gap-4 pt-4">
-                  <p className="text-white-80">{question.text}</p>
-                  {question.link && (
-                    <ActionLink href={question.href} target="blank">
-                      Перейти сразу в нужное место
-                    </ActionLink>
-                  )}
-                </div>
-              </div>
-            </div>
-          </article>
-        )
-      })}
-    </CheckoutCard>
+              <p className="text-base leading-[1.3] font-medium text-white-80">
+                {question.text}
+              </p>
+              {question.link && (
+                <ActionLink
+                  size="compact"
+                  href={question.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Перейти сразу в нужное место
+                </ActionLink>
+              )}
+            </FaqItem>
+          )
+        })}
+      </div>
+    </section>
   )
 }

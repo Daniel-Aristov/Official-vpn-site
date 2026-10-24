@@ -13,7 +13,7 @@ export function PricingSection() {
       className="flex scroll-mt-6 flex-col gap-6 bg-white-10 px-4 py-9 min-[1000px]:rounded-2xl"
     >
       <div className="flex flex-col gap-4">
-        <SectionHeading id="pricing-title" title="Тарифы">
+        <SectionHeading id="pricing-title" title="Тарифы OFL VPS">
           Выберите подходящий план
         </SectionHeading>
         <BenefitBadges />

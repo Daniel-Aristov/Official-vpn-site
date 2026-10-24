@@ -3,9 +3,7 @@ import { TelegramIcon } from '@/components/icons/TelegramIcon'
 import { ActionLink } from '@/components/UI/ActionLink'
 import { CheckoutCard } from './CheckoutCard'
 import { CopyAction } from './CopyAction'
-import { supportTelegram } from '@/data/supportContacts'
-
-const supportEmail = 'support@oflvpn.com'
+import { supportEmail, supportTelegram } from '@/data/supportContacts'
 
 export function SubscriptionSupport() {
   return (
@@ -24,7 +22,7 @@ export function SubscriptionSupport() {
           </span>
           <div className="flex min-w-0 flex-1 flex-col gap-4">
             <div className="flex flex-col gap-1">
-              <h3 className="text-lg font-semibold">
+              <h3 className="text-lg font-semibold leading-[23px] max-w-[145px] md:max-w-full">
                 Чат поддержки в Telegram
               </h3>
               <p className="break-all text-white-80">
@@ -51,7 +49,7 @@ export function SubscriptionSupport() {
           </span>
           <div className="flex min-w-0 flex-1 flex-col gap-4">
             <div className="flex flex-col gap-1">
-              <h3 className="text-lg font-semibold">
+              <h3 className="text-lg font-semibold leading-[23px] max-w-[140px] md:max-w-full">
                 Наша почта для обращений
               </h3>
               <p className="break-all select-all text-white-80">

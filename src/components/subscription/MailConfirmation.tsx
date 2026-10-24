@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { MailIcon } from '@/components/icons/MailIcon'
 import { ActionLink } from '@/components/UI/ActionLink'
 import { CheckoutCard } from './CheckoutCard'
 import { EmailCorrectionModal } from './EmailCorrectionModal'
+import { EmailChangeNotification } from './EmailChangeNotification'
 
 export function MailConfirmation({
   email,
@@ -14,6 +15,14 @@ export function MailConfirmation({
   const [isEditing, setIsEditing] = useState(false)
   const [deadline, setDeadline] = useState(0)
   const [now, setNow] = useState(0)
+  const [notification, setNotification] = useState<{
+    id: number
+    email: string
+  } | null>(null)
+  const notificationId = useRef(0)
+  const closeNotification = useCallback(() => {
+    setNotification(null)
+  }, [])
   const remaining = Math.max(0, Math.ceil((deadline - now) / 1000))
 
   useEffect(() => {
@@ -106,8 +115,17 @@ export function MailConfirmation({
         onSave={(nextEmail) => {
           onEmailChange(nextEmail)
           resend()
+          notificationId.current += 1
+          setNotification({ id: notificationId.current, email: nextEmail })
         }}
       />
+      {notification && (
+        <EmailChangeNotification
+          key={notification.id}
+          email={notification.email}
+          onClose={closeNotification}
+        />
+      )}
     </>
   )
 }
